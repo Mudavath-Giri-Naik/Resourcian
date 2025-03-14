@@ -1,34 +1,91 @@
-import React from "react";
+import { 
+  FaReact, FaVuejs, FaNodeJs, FaDocker, FaGit, FaGithub, FaJava, FaPython 
+} from "react-icons/fa";
+import { 
+  SiExpress, SiMongodb, SiPostgresql, SiKubernetes, SiJest, SiCypress, 
+  SiVercel, SiNetlify, SiMysql, SiOracle, SiJenkins, SiSelenium, SiHeroku, 
+  SiDjango, SiFlask, SiFastapi, SiSqlite, SiAnsible, SiTerraform, SiBitbucket 
+} from "react-icons/si";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase } from "react-icons/fa";
-import { SiMongodb, SiNextdotjs, SiExpress, SiTailwindcss } from "react-icons/si";
+// Define TypeScript types
+type Tool = {
+  name: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
 
-const techStacks = [
-  { name: "React.js", icon: <FaReact className="text-blue-500 text-4xl" /> },
-  { name: "Next.js", icon: <SiNextdotjs className="text-black text-4xl" /> },
-  { name: "Node.js", icon: <FaNodeJs className="text-green-500 text-4xl" /> },
-  { name: "Express.js", icon: <SiExpress className="text-gray-700 text-4xl" /> },
-  { name: "MongoDB", icon: <SiMongodb className="text-green-700 text-4xl" /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss className="text-blue-400 text-4xl" /> },
-  { name: "HTML5", icon: <FaHtml5 className="text-orange-500 text-4xl" /> },
-  { name: "CSS3", icon: <FaCss3Alt className="text-blue-600 text-4xl" /> },
-  { name: "JavaScript", icon: <FaJs className="text-yellow-500 text-4xl" /> },
-  { name: "SQL Databases", icon: <FaDatabase className="text-gray-500 text-4xl" /> },
-];
+type TechCategory = {
+  [category: string]: Tool[];
+};
 
-const WebDevelopmentPage = () => {
+type TechStack = {
+  [language: string]: TechCategory;
+};
+
+// Define tech stack with proper typing
+const techStack: TechStack = {
+  JavaScript: {
+    frontend: [{ name: "React", icon: FaReact }, { name: "Vue.js", icon: FaVuejs }],
+    backend: [{ name: "Node.js", icon: FaNodeJs }, { name: "Express.js", icon: SiExpress }],
+    database: [{ name: "MongoDB", icon: SiMongodb }, { name: "PostgreSQL", icon: SiPostgresql }],
+    devops: [{ name: "Docker", icon: FaDocker }, { name: "Kubernetes", icon: SiKubernetes }],
+    testing: [{ name: "Jest", icon: SiJest }, { name: "Cypress", icon: SiCypress }],
+    deployment: [{ name: "Vercel", icon: SiVercel }, { name: "Netlify", icon: SiNetlify }],
+    version_control: [{ name: "Git", icon: FaGit }, { name: "GitHub", icon: FaGithub }],
+  },
+  Java: {
+    frontend: [{ name: "JavaFX", icon: FaJava }, { name: "Vaadin", icon: FaJava }],
+    backend: [{ name: "Spring Boot", icon: FaJava }, { name: "Quarkus", icon: FaJava }],
+    database: [{ name: "MySQL", icon: SiMysql }, { name: "OracleDB", icon: SiOracle }],
+    devops: [{ name: "Jenkins", icon: SiJenkins }, { name: "Kubernetes", icon: SiKubernetes }],
+    testing: [{ name: "JUnit", icon: SiJenkins }, { name: "Selenium", icon: SiSelenium }],
+    deployment: [{ name: "Heroku", icon: SiHeroku }, { name: "AWS", icon: SiBitbucket }],
+    version_control: [{ name: "Git", icon: FaGit }, { name: "GitHub", icon: FaGithub }],
+  },
+  Python: {
+    frontend: [{ name: "Django", icon: SiDjango }, { name: "Flask", icon: SiFlask }],
+    backend: [{ name: "FastAPI", icon: SiFastapi }],
+    database: [{ name: "SQLite", icon: SiSqlite }, { name: "PostgreSQL", icon: SiPostgresql }],
+    devops: [{ name: "Ansible", icon: SiAnsible }, { name: "Terraform", icon: SiTerraform }],
+    testing: [{ name: "PyTest", icon: SiJest }, { name: "UnitTest", icon: SiJenkins }],
+    deployment: [{ name: "Google Cloud", icon: SiBitbucket }, { name: "Azure", icon: SiBitbucket }],
+    version_control: [{ name: "Git", icon: FaGit }, { name: "Bitbucket", icon: SiBitbucket }],
+  },
+};
+
+// TechCard component with modern design
+const TechCard: React.FC<{ language: string; stack: TechCategory }> = ({ language, stack }) => {
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Web Development Tech Stack</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-        {techStacks.map((tech, index) => (
-          <Card key={index} className="flex flex-col items-center p-4 shadow-lg bg-white rounded-2xl">
-            <CardContent className="flex flex-col items-center space-y-4">
-              {tech.icon}
-              <p className="text-lg font-medium text-gray-700">{tech.name}</p>
-            </CardContent>
-          </Card>
+    <div className="border border-gray-300  p-5 shadow-sm w-full lg:w-1/3 xl:w-1/4 bg-white">
+      <h2 className="text-xl font-bold mb-4 text-center">{language}</h2>
+      <table className="w-full border-collapse text-left">
+        <tbody>
+          {Object.entries(stack).map(([category, tools]) => (
+            <tr key={category} className="border-t border-gray-200">
+              <td className="p-2 font-semibold align-top w-1/3">{category.replace("_", " ")}</td>
+              <td className="p-2 grid grid-cols-2 gap-x-4 gap-y-2">
+                {tools.map((tool: Tool) => (
+                  <div key={tool.name} className="flex items-center gap-2">
+                    <tool.icon className="w-5 h-5" />
+                    <span>{tool.name}</span>
+                  </div>
+                ))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+// Main Page Component
+const WebDevelopmentPage: React.FC = () => {
+  return (
+    <div className="flex flex-col items-center justify-center p-20 space-y-20 bg-gray-200">
+      <h1 className="text-4xl font-bold text-black-800">Full Stack Development Tools</h1>
+      <div className="flex flex-wrap justify-center gap-5 w-full max-w-screen-xl">
+        {Object.entries(techStack).map(([language, stack]) => (
+          <TechCard key={language} language={language} stack={stack} />
         ))}
       </div>
     </div>
