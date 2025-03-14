@@ -22,7 +22,7 @@ export default function Hero() {
         </div>
 
 
-          <h1 className="text-4xl font-bold mt-4">One Stop for Developers 🚀</h1>
+          <h1 className="text-4xl font-bold mt-4">One Stop for All Developers 🚀</h1>
           <p className="mt-4 text-lg text-gray-700">
             Discover top-notch learning resources, Opportunities, and open-source projects—all in one place! 📚💻
           </p>
