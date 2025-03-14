@@ -1,40 +1,61 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close menu automatically when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-white shadow-md fixed w-full z-20">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
+      <nav className="bg-white fixed w-full z-20 border-b border-gray-300 shadow-sm">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          {/* Logo on the left */}
+          <Link
+            href="/"
+            className="text-xl font-bold text-white bg-black px-5 py-2 rounded-md shadow-md"
+          >
             Resourcian
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="space-x-6 hidden md:flex">
-            <Link href="/resources" className="hover:text-blue-500">
-              Resources
-            </Link>
-            <Link href="/opportunities" className="hover:text-blue-500">
-              Opportunities
-            </Link>
-            <Link href="/open-source" className="hover:text-blue-500">
-              Open Source
-            </Link>
-            <Link href="/professional" className="hover:text-blue-500">
-              Blogs
-            </Link>
-            <Link href="/profile" className="hover:text-blue-500">
-              Profile
-            </Link>
+          {/* Desktop Menu - Centered */}
+          <div className="hidden md:flex items-center space-x-8 border border-gray-300 px-6 py-2 rounded-md shadow-sm">
+            {["Resources", "Opportunities", "Open Source", "Blogs", "Profile"].map(
+              (item) => {
+                const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
+                return (
+                  <Link
+                    key={item}
+                    href={path}
+                    className={`relative text-lg font-medium transition-all duration-300 ${
+                      pathname === path
+                        ? "text-blue-500 font-semibold"
+                        : "text-gray-700 hover:text-blue-500"
+                    }`}
+                  >
+                    {item}
+                    {pathname === path && (
+                      <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-500"></span>
+                    )}
+                  </Link>
+                );
+              }
+            )}
           </div>
 
-          <Link href="/auth" className="hidden md:block bg-blue-500 text-white px-4 py-2 rounded-md">
+          {/* Sign In Button on the Right */}
+          <Link
+            href="/auth"
+            className="hidden md:block bg-black text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition-all"
+          >
             Sign In
           </Link>
 
@@ -48,19 +69,22 @@ export default function Navbar() {
       {/* Overlay (Blur Background When Sidebar Opens) */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-10"
+          className="fixed inset-0 bg-black bg-opacity-50 z-10 transition-opacity"
           onClick={() => setIsOpen(false)}
         ></div>
       )}
 
       {/* Sidebar (Mobile Menu) */}
       <div
-        className={`fixed top-0 left-0 h-full w-4/5 bg-white shadow-lg transform transition-transform duration-300 z-30 ${
+        className={`fixed top-0 left-0 h-full w-4/5 bg-white shadow-lg transform transition-transform duration-300 z-30 border-r border-gray-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center p-4 border-b">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
+        <div className="flex justify-between items-center p-5 border-b border-gray-300 shadow-sm">
+          <Link
+            href="/"
+            className="text-xl font-bold text-white bg-black px-5 py-2 rounded-md shadow-md"
+          >
             Resourcian
           </Link>
           <button className="text-2xl" onClick={() => setIsOpen(false)}>
@@ -68,41 +92,32 @@ export default function Navbar() {
           </button>
         </div>
 
-        <ul className="flex flex-col space-y-4 p-4 text-lg">
+        <ul className="flex flex-col space-y-6 p-6 text-lg font-medium">
+          {["Resources", "Opportunities", "Open Source", "Blogs", "Profile"].map(
+            (item) => {
+              const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
+              return (
+                <li key={item}>
+                  <Link
+                    href={path}
+                    className={`block py-3 px-4 rounded-md transition-all duration-300 ${
+                      pathname === path
+                        ? "text-blue-500 font-semibold bg-gray-100"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-blue-500"
+                    }`}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              );
+            }
+          )}
           <li>
-            <Link href="/resources" className="flex items-center space-x-2 hover:text-blue-500">
-              <span>📚</span>
-              <span>Resources</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/opportunities" className="flex items-center space-x-2 hover:text-blue-500">
-              <span>🚀</span>
-              <span>Opportunities</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/open-source" className="flex items-center space-x-2 hover:text-blue-500">
-              <span>💻</span>
-              <span>Open Source</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/professional" className="flex items-center space-x-2 hover:text-blue-500">
-              <span>🎯</span>
-              <span>Blogs</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/profile" className="flex items-center space-x-2 hover:text-blue-500">
-              <span>👤</span>
-              <span>Profile</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/auth" className="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-md">
-              <span>🔑</span>
-              <span>Sign In</span>
+            <Link
+              href="/auth"
+              className="block w-full text-center bg-black text-white px-5 py-3 rounded-md shadow-md hover:scale-105 transition-all"
+            >
+              Sign In
             </Link>
           </li>
         </ul>
