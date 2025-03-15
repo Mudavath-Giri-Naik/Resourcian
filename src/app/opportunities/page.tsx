@@ -380,7 +380,9 @@ export default function OpportunitiesPage() {
          opp.company.toLowerCase().includes(searchQuery.toLowerCase())) &&
         (showStatus === "all" || opp.status === showStatus)
       )
-      .sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
+      .sort((a, b) => 
+        String(a[sortBy as keyof typeof a]).localeCompare(String(b[sortBy as keyof typeof b]))
+      );
   }, [filter, searchQuery, sortBy, showStatus]);
 
   return (
