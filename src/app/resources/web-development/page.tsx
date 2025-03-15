@@ -1,3 +1,6 @@
+"use client"; // Only needed if using Next.js App Router (13+)
+
+
 import { 
   FaReact, FaVuejs, FaNodeJs, FaDocker, FaGit, FaGithub, FaJava, FaPython 
 } from "react-icons/fa";
@@ -51,10 +54,32 @@ const techStack: TechStack = {
     version_control: [{ name: "Git", icon: FaGit }, { name: "Bitbucket", icon: SiBitbucket }],
   },
 };
-
+const qaPairs = [
+  {
+    question: "What is the best way to start learning web development?",
+    answer: "Start with HTML, CSS, and JavaScript. Once you're comfortable, move to a frontend framework like React or Next.js."
+  },
+  {
+    question: "Should I learn JavaScript before React?",
+    answer: "Yes! JavaScript fundamentals are essential before diving into React or Next.js."
+  },
+  {
+    question: "What is the difference between React and Next.js?",
+    answer: "React is a frontend library, while Next.js is a framework that adds features like server-side rendering, static site generation, and API routes."
+  },
+  {
+    question: "Why should I use Tailwind CSS instead of normal CSS?",
+    answer: "Tailwind CSS makes styling faster with utility classes, improves consistency, and reduces the need for writing custom CSS."
+  },
+  {
+    question: "How do I optimize a React app for better performance?",
+    answer: "Use React.memo, lazy loading, code splitting, and minimize re-renders with useCallback and useMemo."
+  }
+];
 // TechCard component with modern design
 const TechCard: React.FC<{ language: string; stack: TechCategory }> = ({ language, stack }) => {
   return (
+    <>
     <div className="border border-gray-300  p-5 shadow-sm w-full lg:w-1/3 xl:w-1/4 bg-white">
       <h2 className="text-xl font-bold mb-4 text-center">{language}</h2>
       <table className="w-full border-collapse text-left">
@@ -75,6 +100,8 @@ const TechCard: React.FC<{ language: string; stack: TechCategory }> = ({ languag
         </tbody>
       </table>
     </div>
+
+    </>
   );
 };
 
@@ -88,6 +115,7 @@ const WebDevelopmentPage: React.FC = () => {
           <TechCard key={language} language={language} stack={stack} />
         ))}
       </div>
+        
     </div>
   );
 };
