@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { FiSearch, FiFilter, FiExternalLink, FiCalendar, FiAward } from "react-icons/fi";
+import { FiSearch, FiFilter, FiExternalLink, FiCalendar,FiChevronDown, FiAward } from "react-icons/fi";
 
 const opportunities = [
   // Hackathons
@@ -365,6 +365,53 @@ const opportunities = [
 
 
 
+const OpportunityCard = ({ opp }: { opp: any }) => (
+  <div className="group bg-white rounded-xl border border-gray-100 hover:border-gray-200 transition-all duration-200 p-6 shadow-sm hover:shadow-md">
+    <div className="flex flex-col h-full">
+      <div className="mb-4">
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">{opp.title}</h3>
+            <p className="text-sm text-gray-500 font-medium">{opp.company}</p>
+          </div>
+          <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
+            opp.type === "Internship" ? "bg-blue-50 text-blue-700" :
+            opp.type === "Hackathon" ? "bg-orange-50 text-orange-700" :
+            "bg-purple-50 text-purple-700"
+          }`}>
+            {opp.type}
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-auto space-y-3">
+        <div className="flex items-center text-sm text-gray-600">
+          <FiCalendar className="mr-2 w-4 h-4 text-gray-400" />
+          <span className={`font-medium ${
+            opp.status === "Ongoing" ? "text-green-600" : "text-amber-600"
+          }`}>
+            {opp.status.replace("Not Started", "Upcoming")}
+          </span>
+        </div>
+        
+        <div className="flex items-center text-sm text-gray-600">
+          <FiAward className="mr-2 w-4 h-4 text-gray-400" />
+          <span className="font-medium">{opp.eligibility}</span>
+        </div>
+      </div>
+
+      <a
+        href={opp.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 w-full inline-flex items-center justify-between px-4 py-2.5 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors group-hover:bg-gray-100"
+      >
+        <span className="text-sm font-medium text-gray-700">View details</span>
+        <FiExternalLink className="w-4 h-4 text-gray-500" />
+      </a>
+    </div>
+  </div>
+);
 
 export default function OpportunitiesPage() {
   const [filter, setFilter] = useState("All");
@@ -386,154 +433,85 @@ export default function OpportunitiesPage() {
   }, [filter, searchQuery, sortBy, showStatus]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 md:p-8">
-      {/* Header Section */}
-      <header className="mb-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
-          Opportunity Hub
-        </h1>
-        <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-          Discover annual recurring opportunities to boost your career. 
-          <span className="block mt-2 text-blue-600 font-semibold">
-            Never miss your perfect chance! 🌟
-          </span>
-        </p>
-      </header>
-
-      {/* Controls Section */}
-      <div className="mb-8 space-y-4">
-        <div className="relative max-w-2xl mx-auto">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <FiSearch className="h-5 w-5 text-gray-400" />
-          </div>
-          <input
-            type="text"
-            placeholder="Search opportunities..."
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+    <div className="min-h-screen bg-gray-50 p-6 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-12 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            Opportunity Hub
+          </h1>
+          <p className="text-gray-600 md:text-lg max-w-2xl mx-auto">
+            Curated collection of professional opportunities in tech
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 justify-center items-center">
-          {/* Filter Chips */}
-          <div className="flex flex-wrap gap-2">
-            {["All", "Internship", "Hackathon", "Competition"].map((type) => (
-              <button
-                key={type}
-                onClick={() => setFilter(type)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  filter === type
-                    ? "bg-blue-600 text-white shadow-lg"
-                    : "bg-white text-gray-600 shadow-md hover:shadow-lg"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
+        {/* Search and Filters */}
+        <div className="mb-8 space-y-4">
+          <div className="relative">
+            <FiSearch className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search opportunities..."
+              className="w-full pl-12 pr-4 py-3.5 bg-white rounded-xl border border-gray-200 focus:border-gray-400 focus:ring-0 text-gray-700 placeholder-gray-500"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
 
-          {/* Status Toggle */}
-          <div className="flex items-center space-x-2 bg-white p-2 rounded-lg shadow-md">
-            <span className="text-gray-600 text-sm">Status:</span>
-            <button
-              onClick={() => setShowStatus("all")}
-              className={`px-3 py-1 rounded-md text-sm ${
-                showStatus === "all" ? "bg-blue-100 text-blue-600" : "text-gray-600"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setShowStatus("Ongoing")}
-              className={`px-3 py-1 rounded-md text-sm ${
-                showStatus === "Ongoing" ? "bg-green-100 text-green-600" : "text-gray-600"
-              }`}
-            >
-              Ongoing
-            </button>
-            <button
-              onClick={() => setShowStatus("Not Started")}
-              className={`px-3 py-1 rounded-md text-sm ${
-                showStatus === "Not Started" ? "bg-orange-100 text-orange-600" : "text-gray-600"
-              }`}
-            >
-              Upcoming
-            </button>
-          </div>
-
-          {/* Sort Dropdown */}
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="bg-white px-4 py-2 rounded-lg shadow-md text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="title">Sort by Title</option>
-            <option value="company">Sort by Company</option>
-            <option value="status">Sort by Status</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Opportunities Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filteredOpportunities.map((opp, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800">{opp.title}</h3>
-                <p className="text-sm text-gray-500">{opp.company}</p>
-              </div>
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  opp.type === "Internship"
-                    ? "bg-blue-100 text-blue-600"
-                    : opp.type === "Hackathon"
-                    ? "bg-orange-100 text-orange-600"
-                    : "bg-purple-100 text-purple-600"
-                }`}
+          <div className="flex flex-wrap gap-3 items-center">
+            <div className="relative flex-1 md:flex-none">
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="w-full pl-4 pr-10 py-3 bg-white rounded-xl border border-gray-200 text-gray-700 appearance-none"
               >
-                {opp.type}
-              </span>
+                <option value="All">All Categories</option>
+                <option value="Hackathon">Hackathons</option>
+                <option value="Internship">Internships</option>
+                <option value="Competition">Competitions</option>
+              </select>
+              <FiChevronDown className="absolute right-4 top-4 text-gray-500 pointer-events-none" />
             </div>
 
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center text-gray-600">
-                <FiCalendar className="mr-2" />
-                <span className={opp.status === "Ongoing" ? "text-green-600" : "text-orange-600"}>
-                  {opp.status}
-                </span>
-              </div>
-              <div className="flex items-center text-gray-600">
-                <FiAward className="mr-2" />
-                <span>{opp.eligibility}</span>
-              </div>
+            <div className="relative flex-1 md:flex-none">
+              <select
+                value={showStatus}
+                onChange={(e) => setShowStatus(e.target.value)}
+                className="w-full pl-4 pr-10 py-3 bg-white rounded-xl border border-gray-200 text-gray-700 appearance-none"
+              >
+                <option value="all">All Statuses</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Not Started">Upcoming</option>
+              </select>
+              <FiChevronDown className="absolute right-4 top-4 text-gray-500 pointer-events-none" />
             </div>
-
-            <a
-              href={opp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 w-full inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
-            >
-              View Opportunity
-              <FiExternalLink className="ml-2" />
-            </a>
           </div>
-        ))}
-      </div>
-
-      {/* Empty State */}
-      {filteredOpportunities.length === 0 && (
-        <div className="text-center py-12">
-          <div className="mb-4 text-6xl">😕</div>
-          <h3 className="text-xl text-gray-600">No opportunities found</h3>
-          <p className="text-gray-500">Try adjusting your filters or search terms</p>
         </div>
-      )}
+
+        {/* Opportunities Grid */}
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {filteredOpportunities.map((opp, index) => (
+            <OpportunityCard key={index} opp={opp} />
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {filteredOpportunities.length === 0 && (
+          <div className="text-center py-16">
+            <div className="mb-5 text-gray-400 mx-auto">
+              <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
+              No opportunities found
+            </h3>
+            <p className="text-gray-600">
+              Try adjusting your search or filters
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
