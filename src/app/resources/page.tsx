@@ -1,170 +1,97 @@
-"use client";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { FiBook, FiSmartphone, FiCpu, FiDatabase, FiBox, FiCode } from "react-icons/fi";
+'use client';
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { CheckCircle, Code, Smartphone, BrainCircuit, Database, Lock, Layers } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const resources = [
-  {
-    title: "Web Development",
-    icon: <FiCode className="w-6 h-6" />,
-    category: "Development",
-    duration: "6 Learning Paths",
-    description: "Master modern web technologies including HTML5, CSS3, JavaScript (ES6+), React, and Node.js. Explore advanced concepts like PWAs and WebAssembly.",
-    link: "/resources/web-development",
-  },
-  {
-    title: "Mobile Development",
-    icon: <FiSmartphone className="w-6 h-6" />,
-    category: "Development",
-    duration: "4 Specializations",
-    description: "Build native iOS/Android apps with Swift/Kotlin or cross-platform solutions using Flutter/React Native. Includes performance optimization techniques.",
-    link: "/resources/mobile-development",
-  },
-  {
-    title: "AI & ML",
-    icon: <FiCpu className="w-6 h-6" />,
-    category: "Data Science",
-    duration: "8 Course Series",
-    description: "Deep dive into neural networks, NLP, computer vision, and reinforcement learning using TensorFlow and PyTorch frameworks.",
-    link: "/resources/ai-ml",
-  },
-  {
-    title: "Data Science",
-    icon: <FiDatabase className="w-6 h-6" />,
-    category: "Analytics",
-    duration: "5 Learning Tracks",
-    description: "Complete training in data analysis, visualization, and machine learning with Python/R. Includes big data tools like Spark and Hadoop.",
-    link: "/resources/data-science",
-  },
-  {
-    title: "Blockchain",
-    icon: <FiBox className="w-6 h-6" />,
-    category: "Emerging Tech",
-    duration: "3 Certification Paths",
-    description: "Comprehensive guide to Ethereum, Solidity, smart contracts, and decentralized application development with hands-on projects.",
-    link: "/resources/blockchain",
-  },
-  {
-    title: "Competitive Programming",
-    icon: <FiBook className="w-6 h-6" />,
-    category: "Algorithms",
-    duration: "7 Skill Levels",
-    description: "Systematic approach to mastering data structures, algorithms, and problem-solving techniques for technical interviews.",
-    link: "/resources/competitive-programming",
-  },
+  "📜 Handwritten Notes",
+  "📘 Expert Handbooks",
+  "📊 Diagrammatic Explanations",
+  "📑 Cheat Sheets",
+  "💡 Interview Questions",
+  "🔗 Top Reference Links"
+];
+
+const domains = [
+  { name: "Web Development", icon: Code, slogan: "Build stunning websites", link: "/resources/web-development" },
+  { name: "App Development", icon: Smartphone, slogan: "Create sleek mobile apps", link: "/resources/app-development" },
+  { name: "Artificial Intelligence", icon: BrainCircuit, slogan: "Master AI & ML", link: "/resources/ai" },
+  { name: "Data Science", icon: Database, slogan: "Analyze & visualize data", link: "/resources/data-science" },
+  { name: "Blockchain", icon: Layers, slogan: "Explore decentralized tech", link: "/resources/blockchain" },
+  { name: "Cyber Security", icon: Lock, slogan: "Protect digital assets", link: "/resources/cyber-security" }
 ];
 
 export default function ResourcesPage() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
+  const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Professional Development Resources
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Curated learning paths for technology professionals
-          </p>
-        </div>
+    <div className="min-h-screen bg-gray-900 text-white px-6 md:px-12 py-12">
 
-        {/* Resources Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {resources.map((resource, index) => (
-            <Link key={index} href={resource.link} passHref>
-              <div className="group relative bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ease-out p-8 h-full cursor-pointer border border-gray-100 hover:border-blue-100">
-                {/* Card Header */}
-                <div className="flex items-start mb-6">
-                  <div className="bg-blue-50 p-3 rounded-lg mr-4">
-                    {resource.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-1">
-                      {resource.title}
-                    </h2>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm font-medium text-blue-600">
-                        {resource.category}
-                      </span>
-                      <span className="text-gray-400">•</span>
-                      <span className="text-sm text-gray-500">
-                        {resource.duration}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+      {/* HERO SECTION */}
+      <section className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-yellow-400">Premium Tech Resources 🚀</h1>
+        <p className="text-lg text-gray-300 mt-2">Get high-quality learning materials for Web, AI, Data Science & more!</p>
+        <Button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-lg shadow-md">
+          Get All for ₹999
+        </Button>
+      </section>
 
-                {/* Desktop Content */}
-                {!isMobile && (
-                  <>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {resource.description}
-                    </p>
-                    <div className="absolute bottom-8 left-8 right-8">
-                      <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors">
-                        <span>Explore Path</span>
-                        <svg 
-                          className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
-                            d="M9 5l7 7-7 7" 
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {/* Mobile Indicator */}
-                {isMobile && (
-                  <div className="absolute top-6 right-6 text-gray-400">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </div>
-            </Link>
+      {/* RESOURCE FEATURES SECTION */}
+      <section className="bg-white text-gray-900 shadow-lg rounded-xl p-8 max-w-5xl mx-auto mb-12">
+        <h2 className="text-2xl font-bold text-center mb-5">📚 What’s Inside?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {resources.map((resource, idx) => (
+            <div 
+              key={idx} 
+              className="flex items-center bg-gray-100 p-4 rounded-lg border border-gray-300 transition hover:border-gray-500"
+            >
+              <CheckCircle className="h-5 w-5 text-green-600 mr-3" />
+              <p className="text-sm font-medium">{resource}</p>
+            </div>
           ))}
         </div>
+      </section>
 
-        {/* CTA Section */}
-        {!isMobile && (
-          <div className="mt-16 text-center">
-            <p className="text-gray-600 mb-4">
-              Can't find what you're looking for?
-            </p>
-            <button className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              Request New Resource
-            </button>
-          </div>
-        )}
+      {/* COMPACT PREMIUM CARDS */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {domains.map((domain, index) => {
+          const Icon = domain.icon;
+          return (
+            <Card 
+              key={index} 
+              className="relative p-4 bg-white text-gray-900 border border-gray-300 shadow-lg rounded-lg transition hover:border-gray-600 hover:shadow-xl"
+            >
+              <CardHeader className="flex flex-row items-center space-x-3">
+                <div className="p-3 bg-gray-100 rounded-full shadow-md">
+                  <Icon className="h-8 w-8 text-blue-500" />
+                </div>
+                <CardTitle className="text-lg font-semibold">{domain.name}</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-gray-600 mt-2">
+                {domain.slogan}
+              </CardContent>
+              <Button 
+                className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md"
+                onClick={() => router.push(domain.link)}
+              >
+                View Resources
+              </Button>
+            </Card>
+          );
+        })}
+      </section>
+
+      {/* PRICING SECTION */}
+      <div className="mt-14 text-center">
+        <h2 className="text-2xl font-bold text-yellow-400">Get Everything for ₹999</h2>
+        <p className="text-lg text-gray-300 mt-2">One-time payment for lifetime access</p>
+        <Button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow-md">
+          Buy Now for ₹999
+        </Button>
       </div>
+
     </div>
   );
 }
