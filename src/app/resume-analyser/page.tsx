@@ -1,4 +1,4 @@
-export default function ProfilePage() {
+export default function ResumeAnalyserPage() {
     const user = {
       name: "Girish",
       email: "girish@example.com",

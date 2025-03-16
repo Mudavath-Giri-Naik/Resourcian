@@ -27,19 +27,19 @@ export default function ResourcesPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-6 md:px-12 py-12">
+    <div className="min-h-screen border-b-indigo-50 text-white px-6 md:px-12 py-12">
 
       {/* HERO SECTION */}
       <section className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-yellow-400">Premium Tech Resources 🚀</h1>
-        <p className="text-lg text-gray-300 mt-2">Get high-quality learning materials for Web, AI, Data Science & more!</p>
-        <Button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-lg shadow-md">
+        <h1 className="text-4xl font-bold text-blue-950">Premium Tech Resources 🚀</h1>
+        <p className="text-lg text-gray-950 mt-2">Get high-quality learning materials for Web, AI, Data Science & more!</p>
+        <Button className="mt-4 bg-blue-900 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md">
           Get All for ₹999
         </Button>
       </section>
 
       {/* RESOURCE FEATURES SECTION */}
-      <section className="bg-white text-gray-900 shadow-lg rounded-xl p-8 max-w-5xl mx-auto mb-12">
+      <section className="bg-white text-gray-900  rounded-sm p-8 max-w-5xl mx-auto mb-12">
         <h2 className="text-2xl font-bold text-center mb-5">📚 What’s Inside?</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {resources.map((resource, idx) => (
@@ -55,25 +55,25 @@ export default function ResourcesPage() {
       </section>
 
       {/* COMPACT PREMIUM CARDS */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {domains.map((domain, index) => {
           const Icon = domain.icon;
           return (
             <Card 
               key={index} 
-              className="relative p-4 bg-white text-gray-900 border border-gray-300 shadow-lg rounded-lg transition hover:border-gray-600 hover:shadow-xl"
+              className="relative p-5 bg-white text-gray-900 border  border-gray-100 shadow-sm rounded-lg transition hover:border-gray-900 hover:shadow-lg"
             >
-              <CardHeader className="flex flex-row items-center space-x-3">
-                <div className="p-3 bg-gray-100 rounded-full shadow-md">
+              <CardHeader className="flex flex-row items-center space-x-1">
+                <div className="p-3 rounded-full ">
                   <Icon className="h-8 w-8 text-blue-500" />
                 </div>
                 <CardTitle className="text-lg font-semibold">{domain.name}</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-gray-600 mt-2">
+              <CardContent className="text-sm text-gray-900 ">
                 {domain.slogan}
               </CardContent>
               <Button 
-                className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md"
+                className=" w-full bg-blue-950 hover:bg-black text-white font-medium py-2 "
                 onClick={() => router.push(domain.link)}
               >
                 View Resources
@@ -86,7 +86,7 @@ export default function ResourcesPage() {
       {/* PRICING SECTION */}
       <div className="mt-14 text-center">
         <h2 className="text-2xl font-bold text-yellow-400">Get Everything for ₹999</h2>
-        <p className="text-lg text-gray-300 mt-2">One-time payment for lifetime access</p>
+        <p className="text-lg text-gray-950 mt-2">One-time payment for lifetime access</p>
         <Button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow-md">
           Buy Now for ₹999
         </Button>

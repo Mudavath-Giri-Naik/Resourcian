@@ -55,25 +55,25 @@ const TechCard = ({ language, stack }: { language: string; stack: any }) => {
   const router = useRouter();
 
   return (
-    <div className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-lg transition-all duration-200 w-full max-w-[500px]">
-      <h2 className="text-base font-semibold mb-4 text-gray-900 text-center uppercase">
+    <div className="border border-gray-200 rounded-xl p-7 bg-white hover:shadow-lg transition-all duration-200 w-full max-w-[400px]">
+      <h2 className="text-2xl font-bold mb-4  text-gray-900 text-center uppercase">
         {language}
       </h2>
       
-      <div className="space-y-3">
+      <div className="space-y-1">
         {Object.entries(stack).map(([category, tools]) => (
           <div key={category} className={`${categoryColors[category].bg} rounded-lg p-2`}>
             <div className="flex items-center justify-center mb-2">
-              <span className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
+              <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
                 {category}
               </span>
             </div>
             
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-2 gap-20">
               {(tools as any[]).map((tool) => (
-                <div key={tool.name} className="flex items-center space-x-2 p-1.5 rounded-md bg-white hover:bg-gray-50 transition-colors">
+                <div key={tool.name} className="flex items-center space-x-3  p-1.5 rounded-md bg-white hover:bg-gray-50 transition-colors">
                   <tool.icon className={`w-4 h-4 ${categoryColors[category].icon}`} />
-                  <span className="text-xs font-medium text-gray-700">{tool.name}</span>
+                  <span className="text-xs font-medium text-gray-900">{tool.name}</span>
                 </div>
               ))}
             </div>
@@ -82,10 +82,10 @@ const TechCard = ({ language, stack }: { language: string; stack: any }) => {
       </div>
 
       <button
-        className="mt-4 w-full py-2 text-xs font-semibold text-white bg-gray-900 hover:bg-gray-800 rounded-lg transition-all duration-200 flex items-center justify-center space-x-1.5"
+        className="mt-4 w-full py-3 text-s font-semibold text-white bg-gray-900 hover:bg-gray-800 rounded-lg transition-all duration-200 flex items-center justify-center space-x-1.5"
         onClick={() => router.push(`/web-development/${language.toLowerCase()}`)}
-      >
-        <span>Explore {language}</span>
+      >         
+        <span>View Resources</span>
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>

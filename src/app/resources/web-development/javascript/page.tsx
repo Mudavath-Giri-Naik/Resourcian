@@ -23,7 +23,7 @@ const domains = [
   "Cyber Security"
 ];
 
-export default function ResourcesPage() {
+export default function javascriptPage() {
   return (
     <div className="min-h-screen bg-gray-100 p-10 flex flex-col items-center">
       <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">Premium Tech Learning Resources</h1>
