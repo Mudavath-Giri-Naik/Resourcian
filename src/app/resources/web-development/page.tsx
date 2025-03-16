@@ -1,11 +1,11 @@
-"use client"; // Only needed if using Next.js App Router (13+)
+"use client";
 
-
+import Link from "next/link";
 import { 
   FaReact, FaVuejs, FaNodeJs, FaDocker, FaGit, FaGithub, FaJava, FaPython 
 } from "react-icons/fa";
 import { 
-  SiExpress, SiMongodb, SiPostgresql, SiKubernetes, SiJest, SiCypress, 
+  SiExpress, SiMongodb, SiPostgresql, SiKubernetes, SiJest, SiCypress,SiNextdotjs,SiNestjs,
   SiVercel, SiNetlify, SiMysql, SiOracle, SiJenkins, SiSelenium, SiHeroku, 
   SiDjango, SiFlask, SiFastapi, SiSqlite, SiAnsible, SiTerraform, SiBitbucket 
 } from "react-icons/si";
@@ -76,48 +76,83 @@ const qaPairs = [
     answer: "Use React.memo, lazy loading, code splitting, and minimize re-renders with useCallback and useMemo."
   }
 ];
-// TechCard component with modern design
-const TechCard: React.FC<{ language: string; stack: TechCategory }> = ({ language, stack }) => {
-  return (
-    <>
-    <div className="border border-gray-300  p-5 shadow-sm w-full lg:w-1/3 xl:w-1/4 bg-white">
-      <h2 className="text-xl font-bold mb-4 text-center">{language}</h2>
-      <table className="w-full border-collapse text-left">
-        <tbody>
-          {Object.entries(stack).map(([category, tools]) => (
-            <tr key={category} className="border-t border-gray-200">
-              <td className="p-2 font-semibold align-top w-1/3">{category.replace("_", " ")}</td>
-              <td className="p-2 grid grid-cols-2 gap-x-4 gap-y-2">
-                {tools.map((tool: Tool) => (
-                  <div key={tool.name} className="flex items-center gap-2">
-                    <tool.icon className="w-5 h-5" />
-                    <span>{tool.name}</span>
-                  </div>
-                ))}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
 
-    </>
-  );
-};
 
-// Main Page Component
-const WebDevelopmentPage: React.FC = () => {
+
+const TechCard = ({ language, stack }: { language: string; stack: any }) => {
+  const path = `/web-development/${language.toLowerCase()}`;
+
   return (
-    <div className="flex flex-col items-center justify-center p-20 space-y-20 bg-gray-200">
-      <h1 className="text-4xl font-bold text-black-800">Full Stack Development Tools</h1>
-      <div className="flex flex-wrap justify-center gap-5 w-full max-w-screen-xl">
-        {Object.entries(techStack).map(([language, stack]) => (
-          <TechCard key={language} language={language} stack={stack} />
+    <div className="border border-gray-200 rounded-lg p-4 shadow-sm w-full md:max-w-[320px] bg-white mb-4 hover:shadow-md transition-shadow">
+      <h2 className="text-lg font-bold mb-3 text-gray-800 text-center">
+        {language}
+      </h2>
+      
+      <div className="space-y-1">
+        {Object.entries(stack).map(([category, tools]: [string, any]) => (
+          <div key={category} className="flex flex-col">
+            {/* Category Header */}
+            <div className="relative flex items-center py-1">
+              <div className="flex-grow border-t border-gray-200"></div>
+              <span className={`flex-shrink-0 px-2 text-xs font-medium uppercase tracking-wide ${getCategoryColor(category)} bg-gray-50 rounded-full`}>
+                {category.replace("_", " ")}
+              </span>
+              <div className="flex-grow border-t border-gray-200"></div>
+            </div>
+
+            {/* Tools Grid */}
+            <div className="grid grid-cols-2 gap-2 pl-4">
+              {tools.map((tool: any) => (
+                <div key={tool.name} className="flex items-center gap-2 p-1.5 bg-gray-50 rounded">
+                  <tool.icon className={`w-4 h-4 flex-shrink-0 ${getCategoryColor(category)}`} />
+                  <span className="text-sm text-gray-700 truncate">{tool.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
-        
+
+      <Link href={path} className="mt-4 block">
+        <button className="w-full py-2 px-3 bg-gray-800 hover:bg-gray-900 text-white rounded-md text-sm font-medium transition-colors">
+          Open Resources
+        </button>
+      </Link>
     </div>
   );
 };
+// Add this utility function above your component
+const getCategoryColor = (category: string) => {
+  const colors: { [key: string]: string } = {
+    frontend: "text-blue-600",
+    backend: "text-purple-600",
+    database: "text-emerald-600",
+    devops: "text-orange-600",
+    testing: "text-red-600",
+    deployment: "text-cyan-600",
+    version_control: "text-pink-600"
+  };
+  return colors[category] || "text-gray-600";
+};
 
-export default WebDevelopmentPage;
+
+
+export default function WebDevelopmentPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10 mt-10">
+          Full Stack Developement with
+        </h1>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {Object.entries(techStack).map(([language, stack]) => (
+            <TechCard key={language} language={language} stack={stack} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+

@@ -28,7 +28,7 @@ export default function Navbar() {
 
           {/* Desktop Menu - Centered */}
           <div className="hidden md:flex items-center space-x-8 border border-gray-300 px-6 py-2 rounded-md shadow-sm">
-            {["Resources", "Opportunities", "Open Source", "Blogs", "Profile"].map(
+            {["Resources", "Opportunities", "Roadmaps", "Blogs", "Profile"].map(
               (item) => {
                 const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
                 return (
@@ -93,7 +93,7 @@ export default function Navbar() {
         </div>
 
         <ul className="flex flex-col space-y-6 p-6 text-lg font-medium">
-          {["Resources", "Opportunities", "Open Source", "Blogs", "Profile"].map(
+          {["Resources", "Opportunities", "Roadmaps", "Blogs", "Profile"].map(
             (item) => {
               const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
               return (
