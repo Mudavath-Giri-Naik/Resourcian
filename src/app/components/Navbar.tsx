@@ -26,30 +26,49 @@ export default function Navbar() {
             Resourcian
           </Link>
 
-          {/* Desktop Menu - Centered */}
-          <div className="hidden md:flex items-center space-x-8 border border-gray-300 px-6 py-2 rounded-md shadow-sm">
-            {["Resources", "Opportunities", "Roadmaps", "Blogs", "Resume Analyser"].map(
-              (item) => {
-                const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
-                return (
-                  <Link
-                    key={item}
-                    href={path}
-                    className={`relative text-lg font-medium transition-all duration-300 ${
-                      pathname === path
-                        ? "text-blue-500 font-semibold"
-                        : "text-gray-700 hover:text-blue-500"
-                    }`}
-                  >
-                    {item}
-                    {pathname === path && (
-                      <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-500"></span>
-                    )}
-                  </Link>
-                );
-              }
+          <div className="relative hidden md:inline-block rounded-md">
+  {/* Animated Border */}
+  <div className="absolute -inset-[2px] rounded-md overflow-hidden z-0">
+    <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,#ff6b6b_0%,#4ecdc4_25%,#45b7d1_50%,#96c93d_75%,#ff6b6b_100%)] animate-border-spin opacity-70 w-[200%] h-[200%]"></div>
+  </div>
+
+  {/* Menu Items */}
+  <div className="hidden md:flex items-center space-x-8 px-6 py-2 rounded-md bg-white backdrop-blur-sm relative z-10 shadow-sm">
+    {["Resources", "Opportunities", "Roadmaps", "Blogs", "Resume Analyser"].map(
+      (item) => {
+        const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
+        return (
+          <Link
+            key={item}
+            href={path}
+            className={`relative text-lg font-medium transition-all duration-300 ${
+              pathname === path
+                ? "text-blue-600 font-semibold"
+                : "text-gray-800 hover:text-blue-600"
+            } group`}
+          >
+            {item}
+            {pathname === path ? (
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transition-all duration-300"></span>
+            ) : (
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             )}
-          </div>
+          </Link>
+        );
+      }
+    )}
+  </div>
+
+  <style jsx>{`
+    @keyframes border-spin {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    .animate-border-spin {
+      animation: border-spin 4s linear infinite;
+    }
+  `}</style>
+</div>
 
           {/* Sign In Button on the Right */}
           <Link
