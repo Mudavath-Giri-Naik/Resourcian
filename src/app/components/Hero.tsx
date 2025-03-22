@@ -46,10 +46,10 @@ export default function Hero() {
         {/* Right Side Image */}
         <div className="md:w-1/2 lg:mr-10  md:mt-0 flex justify-center md:justify-end">
           <Image
-            src="https://shorturl.at/f2lyd" // Replace with actual image URL
+            src="https://shorturl.at/gMRgr" // Replace with actual image URL
             alt="Illustration"
-            width={450}
-            height={300}
+            width={500}
+            height={500}
             className="rounded-lg"
           />
         </div>
