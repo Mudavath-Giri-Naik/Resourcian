@@ -46,7 +46,7 @@ export default function Hero() {
         {/* Right Side Image */}
         <div className="md:w-1/2 lg:mr-10  md:mt-0 flex justify-center md:justify-end">
           <Image
-            src="https://shorturl.at/gMRgr" // Replace with actual image URL
+            src="/hero_image.jpg" 
             alt="Illustration"
             width={500}
             height={500}
