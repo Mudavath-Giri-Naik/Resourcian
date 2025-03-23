@@ -1,8 +1,15 @@
 import { ReactNode } from "react";
 import "../app/styles/globals.css";
 import Navbar from "../app/components/Navbar";
-
 import Footer from "../app/components/Footer";
+
+export const metadata = {
+  title: "My Website",
+  description: "Start your software engineering journey!",
+  icons: {
+    icon: "/icon.ico", // Correct reference to your favicon
+  },
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

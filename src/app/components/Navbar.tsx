@@ -65,7 +65,7 @@ export default function Navbar() {
       to { transform: rotate(0deg); }
     }
     .animate-border-spin {
-      animation: border-spin 4s linear infinite;
+      animation: border-spin s linear infinite;
     }
   `}</style>
 </div>
