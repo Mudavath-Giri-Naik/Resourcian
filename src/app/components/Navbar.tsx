@@ -27,14 +27,11 @@ export default function Navbar() {
           </Link>
 
           <div className="relative hidden md:inline-block rounded-md">
-  {/* Animated Border */}
-  <div className="absolute -inset-[2px] rounded-md overflow-hidden z-0">
-    <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,#ff6b6b_0%,#4ecdc4_25%,#45b7d1_50%,#96c93d_75%,#ff6b6b_100%)] animate-border-spin opacity-70 w-[200%] h-[200%]"></div>
-  </div>
+
 
   {/* Menu Items */}
-  <div className="hidden md:flex items-center space-x-8 px-6 py-2 rounded-md bg-white backdrop-blur-sm relative z-10 shadow-sm">
-    {["Resources", "Opportunities", "Roadmaps", "Blogs", "Resume Analyser"].map(
+  <div className="hidden md:flex items-center space-x-8 shadow-sm border-1 px-6 py-2 rounded-md bg-white backdrop-blur-sm relative z-10 ">
+    {["Explore","Resources","DSA", "Opportunities", "Roadmaps", "Case Studies", "Resume Analyser"].map(
       (item) => {
         const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
         return (
@@ -59,15 +56,7 @@ export default function Navbar() {
     )}
   </div>
 
-  <style jsx>{`
-    @keyframes border-spin {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0deg); }
-    }
-    .animate-border-spin {
-      animation: border-spin s linear infinite;
-    }
-  `}</style>
+
 </div>
 
           {/* Sign In Button on the Right */}
@@ -88,7 +77,7 @@ export default function Navbar() {
       {/* Overlay (Blur Background When Sidebar Opens) */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-10 transition-opacity"
+          className="fixed inset-0  bg-opacity-50 z-10 transition-opacity"
           onClick={() => setIsOpen(false)}
         ></div>
       )}
@@ -112,7 +101,7 @@ export default function Navbar() {
         </div>
 
         <ul className="flex flex-col space-y-6 p-6 text-lg font-medium">
-          {["Resources", "Opportunities", "Roadmaps", "Blogs", "Resume Analyser"].map(
+          {["Explore","Resources","DSA", "Opportunities", "Roadmaps", "Case Studies", "Resume Analyser"].map(
             (item) => {
               const path = `/${item.toLowerCase().replace(/\s/g, "-")}`;
               return (
@@ -121,8 +110,8 @@ export default function Navbar() {
                     href={path}
                     className={`block py-3 px-4 rounded-md transition-all duration-300 ${
                       pathname === path
-                        ? "text-blue-500 font-semibold bg-gray-100"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-blue-500"
+                        ? "text-blue-800 font-bold bg-gray-300"
+                        : "text-gray-900 hover:bg-gray-200 hover:text-blue-500"
                     }`}
                   >
                     {item}

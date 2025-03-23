@@ -4,7 +4,7 @@ import Navbar from "../app/components/Navbar";
 import Footer from "../app/components/Footer";
 
 export const metadata = {
-  title: "My Website",
+  title: "Resourcian",
   description: "Start your software engineering journey!",
   icons: {
     icon: "/icon.ico", // Correct reference to your favicon

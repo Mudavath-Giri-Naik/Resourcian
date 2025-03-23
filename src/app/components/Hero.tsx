@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="bg-[#3B3BFD] bg-gradient-to-b from-[#3B3BFD] via-[#3B3BFD] via-70% to-white flex justify-center items-center lg:py-11 py-8 px-4 sm:px-8 ">
-      <div className="max-w-8xl bg-white text-black border-5 border-black rounded-lg  p-6 md:p-10 flex flex-col md:flex-row items-center w-full md:space-x-6 h-auto md:h-[500px] lg:h-[600px] ">
+    <section className="bg-[#ffffff] bg-gradient-to-b from-[#3B3BFD] via-[#4747ed] via-70% to-white flex justify-center items-center lg:py-11 py-8 px-4 sm:px-8 ">
+      <div className="max-w-7xl bg-white text-black border-5 border-black rounded-lg  p-6 md:p-10 flex flex-col md:flex-row items-center w-full md:space-x-6 h-auto  md:h-[500px] lg:h-[650px] ">
         
         {/* Left Side Content */}
         <div className="md:w-1/2 lg:ml-9 text-left">
@@ -24,12 +24,11 @@ export default function Hero() {
             No more endless searching. No more scattered resources. Just everything you need, all in one place. 🚀
           </p>
           <ul className="mt-4 space-y-2 text-gray-700 text-sm sm:text-base md:text-lg font-medium">
-            <li>🚀 <span className="font-bold">Learn Smarter, Not Harder!</span></li>
-            <li>📝 HandBooks, Cheat Sheets & Visuals</li>
-            <li>⚡ Crystal-Clear, Easy-to-Grasp Content</li>
-            <li>🔥 Top-Quality Resources for Developers</li>
-            <li>🎯 Skip the Fluff, Get Straight to the Point</li>
-            <li>🏆 Stay Ahead & Level Up Fast!</li>
+            <li>✅ No structured resources?</li>
+        <li>✅ Confused about where to start?</li>
+        <li>✅ Don’t know the right roadmap?</li>
+        <li>✅ Missing out on opportunities?</li>
+        <li>✅ Unclear on real-world job roles?</li>
           </ul>
 
           {/* CTA Button */}
