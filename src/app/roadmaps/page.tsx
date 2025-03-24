@@ -27,7 +27,7 @@ export default function ResourcesPage() {
           {categories.map((category) => (
             <Link
               key={category.path}
-              href={`/resources/${category.path}`}
+              href={`/roadmaps/${category.path}`}
               className="group transform transition-all duration-300 hover:scale-105"
             >
               <div className="h-full bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300 border border-gray-200 hover:border-blue-500">
