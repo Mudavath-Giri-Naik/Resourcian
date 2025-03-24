@@ -32,7 +32,7 @@ export default function HigherStudiesPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          In India
+          Outside India
         </motion.button>
         
         <motion.button
@@ -41,7 +41,7 @@ export default function HigherStudiesPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Outside India
+          In India
         </motion.button>
       </div>
       {/* Step 1 */}
