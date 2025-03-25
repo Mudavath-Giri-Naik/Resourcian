@@ -3,16 +3,18 @@
 import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const [visitorCount, setVisitorCount] = useState(null);
+  const [visitorCount, setVisitorCount] = useState<number | string | null>(null);
 
   useEffect(() => {
     const fetchVisitorCount = async () => {
       try {
         const response = await fetch("/api/visitors");
+        if (!response.ok) throw new Error("Failed to fetch visitor count");
         const data = await response.json();
         setVisitorCount(data.count);
       } catch (error) {
         console.error("Error fetching visitor count:", error);
+        setVisitorCount("Error"); // Now allowed due to updated type
       }
     };
 

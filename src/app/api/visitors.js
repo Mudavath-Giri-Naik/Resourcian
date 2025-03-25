@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
-
 let visitorCount = 0;
 
-export async function GET() {
-  visitorCount += 1;
-  return NextResponse.json({ count: visitorCount });
+export default function handler(req, res) {
+  if (req.method === "GET") {
+    visitorCount += 1;
+    res.status(200).json({ count: visitorCount });
+  } else {
+    res.status(405).json({ message: "Method Not Allowed" });
+  }
 }
