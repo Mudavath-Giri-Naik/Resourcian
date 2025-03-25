@@ -2,8 +2,8 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Code, Smartphone, BrainCircuit, Database, Lock, Layers } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Code, Server, Globe, Activity,CheckCircle, Cpu, BarChart } from "lucide-react";
 
 const resources = [
   "📜 Handwritten Notes",
@@ -15,12 +15,12 @@ const resources = [
 ];
 
 const domains = [
-  { name: "Web Development", icon: Code, slogan: "Build stunning websites", link: "/resources/web-development" },
-  { name: "App Development", icon: Smartphone, slogan: "Create sleek mobile apps", link: "/resources/app-development" },
-  { name: "Artificial Intelligence", icon: BrainCircuit, slogan: "Master AI & ML", link: "/resources/ai" },
-  { name: "Data Science", icon: Database, slogan: "Analyze & visualize data", link: "/resources/data-science" },
-  { name: "Blockchain", icon: Layers, slogan: "Explore decentralized tech", link: "/resources/blockchain" },
-  { name: "Cyber Security", icon: Lock, slogan: "Protect digital assets", link: "/resources/cyber-security" }
+  { name: "Frontend", icon: Code, slogan: "Build stunning websites", link: "/resources/web-development" },
+  { name: "Backend", icon: Server, slogan: "Create powerful server-side applications", link: "/resources/app-development" },
+  { name: "Full Stack", icon: Globe, slogan: "Master end-to-end development", link: "/resources/full-stack" },
+  { name: "DevOps", icon: Activity, slogan: "Automate and optimize infrastructure", link: "/resources/devops" },
+  { name: "Artificial Intelligence", icon: Cpu, slogan: "Explore AI & ML innovations", link: "/resources/ai" },
+  { name: "Data Science", icon: BarChart, slogan: "Analyze & visualize data", link: "/resources/data-science" }
 ];
 
 export default function ResourcesPage() {
@@ -34,7 +34,7 @@ export default function ResourcesPage() {
         <h1 className="text-4xl font-bold text-blue-950">Premium Tech Resources 🚀</h1>
         <p className="text-lg text-gray-950 mt-2">Get high-quality learning materials for Web, AI, Data Science & more!</p>
         <Button className="mt-4 bg-blue-900 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md">
-          Get All for ₹999
+          Get All for ₹ 199
         </Button>
       </section>
 
@@ -85,10 +85,10 @@ export default function ResourcesPage() {
 
       {/* PRICING SECTION */}
       <div className="mt-14 text-center">
-        <h2 className="text-2xl font-bold text-yellow-400">Get Everything for ₹999</h2>
+        <h2 className="text-2xl font-bold text-yellow-400">Get Everything for ₹ 199</h2>
         <p className="text-lg text-gray-950 mt-2">One-time payment for lifetime access</p>
         <Button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow-md">
-          Buy Now for ₹999
+          Buy Now for ₹ 199
         </Button>
       </div>
 
