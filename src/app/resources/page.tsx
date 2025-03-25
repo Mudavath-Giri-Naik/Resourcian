@@ -15,9 +15,9 @@ const resources = [
 ];
 
 const domains = [
-  { name: "Frontend", icon: Code, slogan: "Build stunning websites", link: "/resources/web-development" },
-  { name: "Backend", icon: Server, slogan: "Create powerful server-side applications", link: "/resources/app-development" },
-  { name: "Full Stack", icon: Globe, slogan: "Master end-to-end development", link: "/resources/full-stack" },
+  { name: "Frontend", icon: Code, slogan: "Build stunning websites with your creativity", link: "/resources/frontend" },
+  { name: "Backend", icon: Server, slogan: "Create powerful server-side applications", link: "/resources/backend" },
+  { name: "Full Stack", icon: Globe, slogan: "Master end-to-end development", link: "/resources/web-development" },
   { name: "DevOps", icon: Activity, slogan: "Automate and optimize infrastructure", link: "/resources/devops" },
   { name: "Artificial Intelligence", icon: Cpu, slogan: "Explore AI & ML innovations", link: "/resources/ai" },
   { name: "Data Science", icon: BarChart, slogan: "Analyze & visualize data", link: "/resources/data-science" }

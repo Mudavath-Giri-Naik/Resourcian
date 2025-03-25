@@ -83,7 +83,7 @@ const TechCard = ({ language, stack }: { language: string; stack: any }) => {
 
       <button
   className="w-full bg-blue-950 hover:bg-black text-white font-medium py-2 flex items-center justify-center space-x-2 transition-all duration-200 rounded-lg"
-  onClick={() => router.push(`/app/web-development/${language.toLowerCase()}`)}
+  onClick={() => router.push(`/resources/web-development/${language.toLowerCase()}`)}
 >
   <span>View Resources</span>
   <svg
