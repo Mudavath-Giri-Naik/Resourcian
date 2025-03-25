@@ -58,13 +58,13 @@ const jobCategories = [
         {
           name: "Mobile App Developer",
           level: "Fresher/Experienced",
-          salary: "₹10-15 LPA",
+          salary: "₹10-25 LPA",
           workArea: "Building mobile apps",
         },
         {
           name: "Embedded Systems Engineer",
           level: "Experienced",
-          salary: "₹10-15 LPA",
+          salary: "₹10-25 LPA",
           workArea: "Embedded software development",
         },
       ],
@@ -81,13 +81,13 @@ const jobCategories = [
         {
           name: "Data Scientist",
           level: "Experienced",
-          salary: "₹6-9 LPA",
+          salary: "₹10-30 LPA",
           workArea: "Analyzing big data",
         },
         {
           name: "AI Research Engineer",
           level: "Senior",
-          salary: "₹10-15 LPA",
+          salary: "₹10-45 LPA",
           workArea: "AI innovations & research",
         },
       ],
@@ -98,13 +98,13 @@ const jobCategories = [
         {
           name: "Blockchain Developer",
           level: "Experienced",
-          salary: "₹5-8 LPA",
+          salary: "₹15-40 LPA",
           workArea: "Developing blockchain apps",
         },
         {
           name: "Web3 Developer",
           level: "Experienced",
-          salary: "₹5-8 LPA",
+          salary: "₹15-30 LPA",
           workArea: "Building decentralized apps",
         },
       ],
@@ -182,9 +182,13 @@ const jobCategories = [
       answer: (
         <>
           <ul className="list-disc pl-6">
+          <li className="text-blue-600 font-semibold"> Experience ≠ Work Experience:</li>
+            <ul className="list-circle pl-8">
+              <li>Internships, projects, open-source contributions, and coding competitions are often counted as experience..</li>
+            </ul>
             <li className="text-blue-600 font-semibold">Build a Strong Portfolio:</li>
             <ul className="list-circle pl-8">
-              <li>Include AI/ML projects on GitHub/Kaggle (Chatbots, NLP models, Predictive analytics).</li>
+              <li>Include AI/ML projects on GitHub/Kaggle,Contribute to open source & participate in hackathons,Gain internships,showcase your work online.</li>
             </ul>
             <li className="text-green-600 font-semibold">Gain Practical Experience:</li>
             <ul className="list-circle pl-8">
@@ -224,26 +228,31 @@ const jobCategories = [
       ),
     },
   ];
-  const JobPage = () => {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
-  
-    return (
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-3">
-            Explore Tech Job Roles
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Discover top job categories and career opportunities in the tech industry.
-          </p>
-        </div>
-  
-        {/* Job Categories Tables */}
+
+
+// ... (keep the same jobCategories and faqs data as in your original code)
+
+const JobPage = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-5xl">
+      {/* Header Section */}
+      <div className="text-center mb-12">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+          Explore Tech Job Roles
+        </h1>
+        <p className="text-gray-600 md:text-lg">
+          Discover top job categories and career opportunities in the tech industry.
+        </p>
+      </div>
+
+      {/* Desktop Tables (md and above) */}
+      <div className="hidden md:block">
         {jobCategories.map((category, index) => (
           <div key={index} className="mb-8 bg-white rounded-xl shadow-md overflow-hidden">
             <div className="p-6 bg-gray-50 border-b">
-              <h2 className="text-2xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-gray-800">
                 {category.category}
               </h2>
             </div>
@@ -280,34 +289,64 @@ const jobCategories = [
             </div>
           </div>
         ))}
-  
-        {/* FAQ Section */}
-        <section className="mt-12 bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="p-6 bg-gray-50 border-b">
-            <h2 className="text-2xl font-semibold text-gray-800">Frequently Asked Questions</h2>
-          </div>
-          
-          <div className="p-6 space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border rounded-lg">
-                <button
-                  className="w-full flex justify-between items-center p-4 hover:bg-gray-50 transition-colors"
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                >
-                  <span className="text-left font-medium text-gray-800">{faq.question}</span>
-                  {openIndex === index ? <FaChevronUp className="text-gray-600" /> : <FaChevronDown className="text-gray-600" />}
-                </button>
-                {openIndex === index && (
-                  <div className="p-4 pt-2 text-gray-600 border-t">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
-    );
-  };
-  
-  export default JobPage;
+
+      {/* Mobile Cards (below md breakpoint) */}
+      <div className="md:hidden space-y-6">
+        {jobCategories.map((category, catIndex) => (
+          <div key={catIndex}>
+            <h2 className="text-blue-600 font-bold text-lg mb-4">{category.category}</h2>
+            <div className="grid gap-4">
+              {category.roles.map((role, roleIndex) => (
+                <div key={roleIndex} className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-gray-800 font-semibold text-lg">{role.name}</h3>
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                      role.level === "Fresher" ? "bg-green-100 text-green-800" :
+                      role.level === "Experienced" ? "bg-orange-100 text-orange-800" :
+                      "bg-purple-100 text-purple-800"
+                    }`}>
+                      {role.level}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-green-600 font-semibold">{role.salary}</p>
+                    <p className="text-gray-600 text-sm">{role.workArea}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* FAQ Section */}
+      <section className="mt-12 bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="p-6 bg-gray-50 border-b">
+          <h2 className="text-2xl font-semibold text-gray-800">Frequently Asked Questions</h2>
+        </div>
+        
+        <div className="p-6 space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border rounded-lg">
+              <button
+                className="w-full flex justify-between items-center p-4 hover:bg-gray-50 transition-colors"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              >
+                <span className="text-left font-medium text-gray-800">{faq.question}</span>
+                {openIndex === index ? <FaChevronUp className="text-gray-600" /> : <FaChevronDown className="text-gray-600" />}
+              </button>
+              {openIndex === index && (
+                <div className="p-4 pt-2 text-gray-600 border-t">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default JobPage;
